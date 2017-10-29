@@ -1,0 +1,26 @@
+language: java
+jdk:
+- oraclejdk8
+cache:
+  directories:
+  - "$HOME/.m2"
+notifications:
+  email: false
+
+env:
+  global:
+  - secure:
+
+before_install:
+- export TERM=dumb
+- export DISPLAY=:99.0
+- export JAVA6_HOME=/usr/lib/jvm/java-6-openjdk-amd64
+- sh -e /etc/init.d/xvfb start
+
+script: ./gradlew integTest check Javadoc --info --stacktrace
+- gradle check
+- gradle aggregateJavadocs
+
+after_success:
+- .utility/initiate-publish.sh
+- .utility/push-javadoc-to-gh-pages.sh

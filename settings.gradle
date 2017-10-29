@@ -1,0 +1,5 @@
+include 'mxm-core'
+include 'mxm-analysis'
+include 'mxm-lilypond'
+include 'mxm-midi'
+include 'mxm-python'
